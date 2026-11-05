@@ -1,0 +1,966 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f7">
+  <meta name="description" content="Kenali program keahlian, karya, dan layanan SMK Cipta Karya. Siap tumbuh dan berkarya bersama industri.">
+  <title>SMK Cipta Karya — Belajar, Berkarya, Berdampak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f7f7;
+      --surface: #fff;
+      --surface-soft: #ededed;
+      --ink: #141414;
+      --muted: #686868;
+      --line: #dedede;
+      --accent: #171717;
+      --accent-strong: #050505;
+      --accent-soft: #e9e9e9;
+      --lime: #e7e7e7;
+      --shadow: 0 24px 70px rgb(0 0 0 / 10%);
+      --header-bg: rgb(247 247 247 / 88%);
+      --serif: "Manrope", "DM Sans", sans-serif;
+      --sans: "DM Sans", Arial, sans-serif;
+    }
+
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #101010;
+      --surface: #191919;
+      --surface-soft: #222;
+      --ink: #f5f5f5;
+      --muted: #e1e1e1;
+      --line: #363636;
+      --accent: #f2f2f2;
+      --accent-strong: #fff;
+      --accent-soft: #292929;
+      --lime: #dedede;
+      --shadow: 0 24px 70px rgb(0 0 0 / 28%);
+      --header-bg: rgb(16 16 16 / 88%);
+    }
+
+    * { box-sizing: border-box; }
+    html { overflow-x: clip; scroll-behavior: smooth; scroll-padding-top: 92px; }
+    body {
+      margin: 0;
+      overflow-x: clip;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      transition: color .25s ease, background-color .25s ease;
+    }
+    body, button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; text-decoration: none; }
+    button { color: inherit; font: inherit; }
+    img { display: block; max-width: 100%; }
+    ::selection { color: var(--bg); background: var(--ink); }
+    .container { width: min(1160px, calc(100% - 48px)); margin-inline: auto; }
+    .skip-link {
+      position: fixed;
+      z-index: 20;
+      top: 12px;
+      left: 12px;
+      padding: 11px 15px;
+      transform: translateY(-160%);
+      border-radius: 8px;
+      color: white;
+      background: var(--accent-strong);
+    }
+    .skip-link:focus { transform: translateY(0); }
+    :focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
+
+    .site-header {
+      position: sticky;
+      z-index: 10;
+      top: 0;
+      border-bottom: 1px solid color-mix(in srgb, var(--line) 75%, transparent);
+      background: var(--header-bg);
+      backdrop-filter: blur(16px);
+    }
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font: 800 17px var(--serif); letter-spacing: -.7px; }
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px 12px 12px 4px;
+      color: #111;
+      background: var(--lime);
+      font-size: 15px;
+      letter-spacing: -1px;
+    }
+    .brand-copy { display: grid; gap: 1px; }
+    .brand-copy small { color: var(--muted); font: 600 8px var(--sans); letter-spacing: 1.6px; text-transform: uppercase; }
+    .nav-right, .nav-links { display: flex; align-items: center; }
+    .nav-right { gap: 24px; }
+    .nav-links { gap: 28px; color: var(--muted); font-size: 12px; font-weight: 600; }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-actions { display: flex; align-items: center; gap: 9px; }
+    .icon-button, .menu-toggle {
+      width: 39px;
+      height: 39px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--surface);
+      cursor: pointer;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+    .icon-button:hover, .menu-toggle:hover { transform: translateY(-2px); border-color: var(--accent); }
+    .icon-button svg { width: 17px; height: 17px; }
+    .menu-toggle { display: none; }
+
+    .button {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      padding: 0 19px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      transition: transform .22s ease, box-shadow .22s ease, background .22s ease, border-color .22s ease;
+    }
+    .button:hover { transform: translateY(-3px); }
+    .button svg { width: 15px; height: 15px; }
+    .button-primary { color: #fff; background: #141414; box-shadow: 0 9px 22px rgb(0 0 0 / 14%); }
+    :root[data-theme="dark"] .button-primary { color: #111; background: #f2f2f2; box-shadow: none; }
+    .button-primary:hover { background: var(--accent-strong); box-shadow: 0 12px 26px rgb(0 0 0 / 22%); }
+    .button-secondary { border-color: var(--line); background: var(--surface); }
+    .button-secondary:hover { border-color: var(--accent); }
+    .button-light { color: #141414; background: #f1f1f1; }
+    .button-light:hover { box-shadow: 0 10px 24px rgb(0 0 0 / 18%); }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 76px 0 70px;
+    }
+    .hero::before, .hero::after {
+      position: absolute;
+      z-index: -1;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      content: "";
+      pointer-events: none;
+    }
+    .hero::before { top: -225px; right: 4%; background: radial-gradient(circle, rgb(0 0 0 / 8%), transparent 68%); }
+    .hero::after { bottom: -240px; left: -175px; background: radial-gradient(circle, rgb(0 0 0 / 6%), transparent 69%); }
+    .hero-grid { display: grid; grid-template-columns: .95fr 1.05fr; align-items: center; gap: 68px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 20px;
+      color: var(--accent);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+    }
+    .eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 4px rgb(0 0 0 / 9%); }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { font-family: var(--serif); }
+    h1 { max-width: 560px; margin-bottom: 20px; font-size: clamp(42px, 5.4vw, 68px); line-height: 1.08; letter-spacing: -3.8px; }
+    h1 span { color: var(--accent); }
+    .hero-description { max-width: 445px; margin-bottom: 27px; color: var(--muted); font-size: 13px; line-height: 1.9; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 11px; }
+    .hero-note { display: flex; align-items: center; gap: 12px; margin-top: 34px; color: var(--muted); font-size: 9px; line-height: 1.65; }
+    .note-icon { width: 34px; height: 34px; display: grid; flex: 0 0 auto; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--accent); background: var(--surface); }
+    .note-icon svg { width: 15px; height: 15px; }
+    .hero-visual { position: relative; min-width: 0; padding: 0 0 21px 22px; }
+    .hero-visual::before { position: absolute; z-index: -1; top: -18px; right: -17px; width: 48%; height: 48%; border-top: 1px solid var(--accent); border-right: 1px solid var(--accent); border-radius: 0 18px 0 0; content: ""; opacity: .5; }
+    .hero-image-wrap { position: relative; overflow: hidden; aspect-ratio: 1.16 / 1; border-radius: 15px 15px 15px 5px; background: var(--surface-soft); box-shadow: var(--shadow); touch-action: pan-y; }
+    .hero-image-wrap::after { position: absolute; z-index: 1; inset: 34% 0 0; background: linear-gradient(transparent, rgb(0 0 0 / 58%)); content: ""; pointer-events: none; }
+    .carousel-track { position: absolute; inset: 0 auto 0 0; display: flex; height: 100%; transition: transform 1.25s cubic-bezier(.22,.75,.22,1); will-change: transform; }
+    .carousel-track .carousel-image { flex-shrink: 0; height: 100%; object-fit: cover; }
+    .image-caption { position: absolute; z-index: 2; right: 23px; bottom: 62px; left: 23px; display: flex; align-items: end; justify-content: space-between; gap: 12px; color: white; }
+    .image-caption strong { font: 700 14px var(--serif); }
+    .image-caption small { color: rgb(255 255 255 / 76%); font-size: 9px; }
+    .carousel-controls { position: absolute; z-index: 3; bottom: 14px; left: 15px; display: flex; align-items: center; justify-content: flex-start; gap: 14px; margin: 0; }
+    .carousel-controls-left, .carousel-dots { display: flex; align-items: center; }
+    .carousel-controls-left { gap: 10px; }
+    .carousel-dots { gap: 6px; }
+    .carousel-button, .carousel-dot { display: grid; place-items: center; border: 1px solid rgb(255 255 255 / 54%); color: #fff; background: rgb(0 0 0 / 48%); backdrop-filter: blur(8px); cursor: pointer; transition: border-color .2s ease, color .2s ease, background .2s ease, transform .2s ease; }
+    .carousel-button { width: 34px; height: 34px; border-radius: 50%; }
+    .carousel-button:hover { transform: translateY(-2px); border-color: #fff; background: rgb(0 0 0 / 72%); }
+    .carousel-button svg { width: 13px; height: 13px; }
+    .carousel-dot { width: 8px; height: 8px; padding: 0; border-radius: 50%; background: rgb(255 255 255 / 56%); }
+    .carousel-dot[aria-pressed="true"] { width: 21px; border-color: #fff; border-radius: 99px; background: #fff; }
+    .carousel-count { color: #fff; font-size: 9px; font-variant-numeric: tabular-nums; text-shadow: 0 1px 5px rgb(0 0 0 / 65%); }
+    .floating-card {
+      position: absolute;
+      z-index: 2;
+      right: -26px;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 13px 15px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: var(--surface);
+      box-shadow: 0 13px 34px rgb(0 0 0 / 12%);
+      animation: card-float 5s ease-in-out infinite;
+    }
+    .floating-icon { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 9px; color: #111; background: var(--lime); }
+    .floating-icon svg { width: 17px; height: 17px; }
+    .floating-card span { display: grid; gap: 3px; }
+    .floating-card strong { font-size: 10px; }
+    .floating-card small { color: var(--muted); font-size: 8px; }
+
+    .intro-strip { border-block: 1px solid var(--line); background: var(--surface); }
+    .intro-grid { min-height: 100px; display: grid; grid-template-columns: repeat(3, 1fr); align-items: center; }
+    .intro-item { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 19px 15px; }
+    .intro-item + .intro-item { border-left: 1px solid var(--line); }
+    .intro-number { color: var(--accent); font: 800 19px var(--serif); letter-spacing: -1px; }
+    .intro-item p { margin: 0; color: var(--muted); font-size: 9px; line-height: 1.5; }
+    .intro-item strong { display: block; color: var(--ink); font-size: 10px; }
+
+    .section { padding-block: 100px; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 22px; margin-bottom: 37px; }
+    .section-heading .eyebrow { margin-bottom: 13px; }
+    .section-heading h2, .about-copy h2, .contact-copy h2 { margin: 0; font-size: clamp(31px, 4vw, 45px); line-height: 1.14; letter-spacing: -2px; }
+    .section-heading h2 span, .about-copy h2 span, .contact-copy h2 span { color: var(--accent); }
+    .section-heading > p { max-width: 340px; margin: 0 0 3px; color: var(--muted); font-size: 11px; line-height: 1.8; }
+
+    .about-section { display: grid; grid-template-columns: .86fr 1.14fr; align-items: center; gap: 75px; padding-top: 36px; }
+    .about-visual { position: relative; max-width: 440px; }
+    .about-image-wrap { position: relative; overflow: hidden; aspect-ratio: .98 / 1; border-radius: 10px 10px 10px 3px; background: var(--surface-soft); touch-action: pan-y; }
+    .about-image-wrap .carousel-image { border-radius: inherit; }
+    .about-image-wrap::after { position: absolute; z-index: 1; right: 0; bottom: 0; left: 0; height: 30%; background: linear-gradient(transparent, rgb(0 0 0 / 42%)); content: ""; pointer-events: none; }
+    .about-image-wrap .carousel-controls { z-index: 2; }
+    .about-sticker {
+      position: absolute;
+      right: -19px;
+      bottom: 66px;
+      width: 104px;
+      height: 104px;
+      display: grid;
+      place-content: center;
+      border: 6px solid var(--bg);
+      border-radius: 50%;
+      color: #111;
+      background: var(--lime);
+      text-align: center;
+      transform: rotate(7deg);
+    }
+    .about-sticker strong { font: 800 21px var(--serif); line-height: 1.05; }
+    .about-sticker small { margin-top: 5px; font-size: 8px; line-height: 1.3; }
+    .about-copy { padding-block: 14px; }
+    .about-copy h2 { max-width: 500px; margin-bottom: 18px; }
+    .about-copy > p:not(.eyebrow) { max-width: 490px; margin-bottom: 22px; color: var(--muted); font-size: 12px; line-height: 1.9; }
+    .check-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+    .check-list li { display: flex; align-items: center; gap: 10px; font-size: 10px; font-weight: 600; }
+    .check { width: 20px; height: 20px; display: grid; flex: 0 0 auto; place-items: center; border-radius: 50%; color: var(--accent); background: var(--accent-soft); }
+    .check svg { width: 11px; height: 11px; }
+
+    .skills-section { background: var(--surface-soft); }
+    .skills-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .skill-card { min-height: 210px; padding: 21px 18px 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); transition: transform .24s ease, border-color .24s ease, box-shadow .24s ease; }
+    .skill-card:hover { transform: translateY(-5px); border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); box-shadow: 0 15px 35px rgb(0 0 0 / 8%); }
+    .skill-icon { width: 40px; height: 40px; display: grid; place-items: center; margin-bottom: 20px; border-radius: 11px; color: var(--accent); background: var(--accent-soft); }
+    .skill-icon svg { width: 19px; height: 19px; }
+    .skill-card h3 { margin-bottom: 8px; font-size: 15px; letter-spacing: -.5px; }
+    .skill-card p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.75; }
+    .section-footnote { margin: 16px 0 0; color: var(--muted); font-size: 9px; }
+
+    .projects-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 17px; }
+    .project-card { min-width: 0; }
+    .project-image { position: relative; overflow: hidden; aspect-ratio: 1.2 / 1; border-radius: 9px; background: var(--surface-soft); }
+    .project-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.25,1); }
+    .project-card:hover .project-image img { transform: scale(1.045); }
+    .project-tag { position: absolute; top: 13px; left: 13px; padding: 7px 10px; border: 1px solid rgb(255 255 255 / 35%); border-radius: 99px; color: white; background: rgb(0 0 0 / 72%); backdrop-filter: blur(8px); font-size: 8px; font-weight: 700; }
+    .project-info { display: flex; align-items: start; justify-content: space-between; gap: 10px; padding: 15px 1px 0; }
+    .project-info h3 { margin: 0 0 5px; font-size: 14px; letter-spacing: -.4px; }
+    .project-info p { margin: 0; color: var(--muted); font-size: 9px; line-height: 1.6; }
+    .project-arrow { width: 30px; height: 30px; display: grid; flex: 0 0 auto; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--accent); transition: transform .2s ease, color .2s ease, background .2s ease; }
+    .project-card:hover .project-arrow { transform: rotate(45deg); color: var(--bg); background: var(--ink); }
+    .project-arrow svg { width: 13px; height: 13px; }
+
+    .animated-slogan { overflow: hidden; padding: 30px 0; border-block: 1px solid var(--line); background: #111; color: #f7f7f7; }
+    .animated-slogan-inner { width: min(940px, calc(100% - 48px)); margin-inline: auto; text-align: center; }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    .animated-slogan .eyebrow { margin-bottom: 7px; color: #c8c8c8; }
+    .animated-slogan .eyebrow-dot { color: #fff; }
+    .slogan-stage { position: relative; display: grid; min-height: 64px; place-items: center; overflow: hidden; }
+    .slogan-message { grid-area: 1 / 1; width: 100%; margin: 0; opacity: 0; transform: translateX(100%); font: 800 clamp(21px, 3.5vw, 34px)/1.25 var(--serif); letter-spacing: -1.1px; animation: slogan-slide 27s cubic-bezier(.2,.7,.25,1) infinite both; }
+    .slogan-message:nth-child(2) { animation-delay: 9s; }
+    .slogan-message:nth-child(3) { animation-name: slogan-center; animation-delay: 18s; transform: none; }
+    @keyframes slogan-slide {
+      0%, 4% { opacity: 0; transform: translateX(100%); }
+      10%, 26% { opacity: 1; transform: translateX(0); }
+      33%, 34% { opacity: 0; transform: translateX(-100%); }
+      34.1%, 100% { opacity: 0; transform: translateX(-100%); }
+    }
+    @keyframes slogan-center {
+      0%, 4% { opacity: 0; transform: none; }
+      10%, 26% { opacity: 1; transform: none; }
+      33%, 100% { opacity: 0; transform: none; }
+    }
+
+    .service-band { position: relative; overflow: hidden; padding-block: 61px; color: #f5f5f5; background: #111; }
+    .service-band::after { position: absolute; top: -185px; right: -75px; width: 425px; height: 425px; border: 1px solid rgb(255 255 255 / 17%); border-radius: 50%; box-shadow: 0 0 0 40px rgb(255 255 255 / 4%), 0 0 0 80px rgb(255 255 255 / 3%); content: ""; }
+    .service-content { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+    .service-content .eyebrow { color: #c9c9c9; }
+    .service-content h2 { max-width: 625px; margin: 0; font-size: clamp(27px, 3.7vw, 41px); line-height: 1.2; letter-spacing: -1.7px; }
+    .service-content h2 span { color: #bdbdbd; }
+    .service-content > p { max-width: 280px; margin: 20px 0 0; color: #ededed; font-size: 10px; line-height: 1.8; }
+    .service-actions { flex: 0 0 auto; }
+
+    .contact-section { display: grid; grid-template-columns: 1fr .75fr; align-items: center; gap: 50px; padding-block: 92px; }
+    .contact-copy h2 { max-width: 530px; margin-bottom: 15px; }
+    .contact-copy > p:not(.eyebrow) { max-width: 465px; margin-bottom: 22px; color: var(--muted); font-size: 11px; line-height: 1.85; }
+    .contact-card { padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); box-shadow: var(--shadow); }
+    .contact-card-label { display: block; margin-bottom: 10px; color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .contact-email { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid var(--line); color: var(--accent); font: 700 14px var(--serif); overflow-wrap: anywhere; }
+    .contact-email svg { width: 17px; height: 17px; flex: 0 0 auto; }
+    .contact-card .button { width: 100%; margin-top: 17px; }
+    .placeholder-note { margin: 13px 0 0; color: var(--muted); font-size: 8px; line-height: 1.65; }
+
+    .site-footer { border-top: 1px solid var(--line); }
+    .footer-inner { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .footer-inner p { margin: 0; color: var(--muted); font-size: 9px; }
+    .footer-links { display: flex; gap: 18px; color: var(--muted); font-size: 9px; }
+    .footer-links a:hover { color: var(--accent); }
+    :root[data-theme="dark"] .site-footer { border-color: #f5f5f5; color: #141414; background: #f5f5f5; }
+    :root[data-theme="dark"] .site-footer .brand-copy small,
+    :root[data-theme="dark"] .site-footer .footer-inner p,
+    :root[data-theme="dark"] .site-footer .footer-links { color: #666; }
+    :root[data-theme="dark"] .site-footer .footer-links a:hover { color: #111; }
+
+    .reveal { opacity: 1; transform: none; }
+    .js-motion .reveal { opacity: 0; transform: translateX(36px); transition: opacity .7s ease, transform .8s cubic-bezier(.2,.7,.25,1); }
+    .js-motion .reveal.is-visible { opacity: 1; transform: translateX(0); }
+    .js-motion .reveal-delay { transition-delay: .12s; }
+    .js-motion .reveal-delay-more { transition-delay: .22s; }
+    @keyframes card-float { 0%, 100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-7px) rotate(0deg); } }
+    @keyframes mark-pop { from { opacity: 0; transform: scale(.85) rotate(-8deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
+    .brand-mark { animation: mark-pop .55s .1s both cubic-bezier(.2,.8,.2,1); }
+
+    @media (max-width: 960px) {
+      .hero-grid { gap: 37px; }
+      .nav-right { gap: 16px; }
+      .nav-links { gap: 18px; }
+      .about-section { gap: 47px; }
+      .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .skill-card { min-height: 185px; }
+      .service-content { align-items: start; flex-wrap: wrap; }
+      .service-actions { margin-left: auto; }
+    }
+    @media (max-width: 700px) {
+      .container { width: min(100% - 36px, 540px); }
+      .nav { min-height: 68px; }
+      .nav-right { gap: 9px; }
+      .menu-toggle { display: grid; }
+      .menu-toggle svg { width: 17px; height: 17px; }
+      .nav-links {
+        position: absolute;
+        top: calc(100% + 1px);
+        right: 18px;
+        left: 18px;
+        display: none;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px 16px;
+        border: 1px solid var(--line);
+        border-radius: 0 0 12px 12px;
+        background: var(--surface);
+        box-shadow: 0 20px 40px rgb(0 0 0 / 10%);
+      }
+      .nav-links.is-open { display: grid; }
+      .nav-links a { padding: 13px 2px; }
+      .nav-links a + a { border-top: 1px solid var(--line); }
+      .hero { padding: 48px 0 56px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 39px; }
+      h1 { max-width: 480px; font-size: clamp(42px, 12vw, 59px); letter-spacing: -2.8px; }
+      .hero-description { max-width: 460px; font-size: 12px; }
+      .hero-visual { margin-right: 13px; padding-left: 11px; }
+      .hero-image-wrap { aspect-ratio: 1.18 / 1; }
+      .floating-card { right: -11px; }
+      .intro-grid { min-height: 0; grid-template-columns: 1fr; padding-block: 6px; }
+      .intro-item { justify-content: flex-start; padding-inline: 5px; }
+      .intro-item + .intro-item { border-top: 1px solid var(--line); border-left: 0; }
+      .intro-number { width: 64px; }
+      .section { padding-block: 72px; }
+      .section-heading { align-items: start; flex-direction: column; margin-bottom: 26px; }
+      .section-heading > p { max-width: 450px; }
+      .about-section { grid-template-columns: 1fr; gap: 32px; padding-top: 15px; }
+      .about-visual { width: calc(100% - 15px); max-width: 500px; }
+      .about-image-wrap { aspect-ratio: 1.2 / 1; }
+      .about-sticker { right: -6px; }
+      .about-sticker strong { max-width: 88px; font-size: 17px; }
+      .about-copy { padding: 0; }
+      .skills-grid { gap: 10px; }
+      .skill-card { min-height: 0; padding: 17px 14px; }
+      .skill-icon { margin-bottom: 15px; }
+      .skill-card h3 { font-size: 13px; }
+      .skill-card p { font-size: 9px; }
+      .projects-grid { grid-template-columns: 1fr; gap: 24px; }
+      .project-image { aspect-ratio: 1.35 / 1; }
+      .project-info { padding-top: 12px; }
+      .service-band { padding-block: 48px; }
+      .service-content { gap: 21px; }
+      .service-content h2 { max-width: 520px; }
+      .service-actions { margin-left: 0; }
+      .contact-section { grid-template-columns: 1fr; gap: 29px; padding-block: 70px; }
+      .contact-card { max-width: 480px; }
+      .footer-inner { min-height: 0; flex-wrap: wrap; justify-content: flex-start; padding-block: 22px; }
+      .footer-inner p { order: 2; width: 100%; }
+    }
+    @media (max-width: 380px) {
+      .container { width: calc(100% - 28px); }
+      .brand { font-size: 15px; }
+      .button { min-height: 44px; padding-inline: 14px; font-size: 10px; }
+      .hero-actions { gap: 8px; }
+      .section-heading h2, .about-copy h2, .contact-copy h2 { font-size: 31px; }
+      .footer-links { gap: 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+      .js-motion .reveal {
+        opacity: 0;
+        transform: translateX(12px);
+        transition: opacity .5s ease, transform .5s ease !important;
+      }
+      .js-motion .reveal.is-visible { opacity: 1; transform: translateX(0); }
+      .slogan-message {
+        display: block;
+        transform: none !important;
+        animation-name: slogan-reduced-fade !important;
+        animation-duration: 27s !important;
+        animation-iteration-count: infinite !important;
+        animation-timing-function: linear !important;
+      }
+      .slogan-stage { min-height: 64px; }
+    }
+    @keyframes slogan-reduced-fade {
+      0%, 8% { opacity: 0; }
+      14%, 28% { opacity: 1; }
+      34%, 100% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#konten">Lewati ke konten</a>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#beranda" aria-label="SMK Cipta Karya, beranda">
+        <span class="brand-mark" aria-hidden="true">CK</span>
+        <span class="brand-copy">SMK Cipta Karya<small>Sekolah vokasi</small></span>
+      </a>
+      <nav class="nav-links" id="nav-links" aria-label="Navigasi utama">
+        <a href="#tentang">Tentang</a>
+        <a href="#keahlian">Keahlian</a>
+        <a href="#karya">Karya & layanan</a>
+        <a href="#kontak">Kontak</a>
+      </nav>
+      <div class="nav-right">
+        <div class="nav-actions">
+          <button class="icon-button theme-toggle" type="button" aria-label="Aktifkan tema gelap" title="Ganti tema">
+            <svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path></svg>
+          </button>
+          <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Buka menu navigasi">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="konten">
+    <section class="hero" id="beranda">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow"><span class="eyebrow-dot"></span> Belajar yang dekat dengan dunia nyata</p>
+          <h1>Belajar hari ini.<br><span>Berkarya untuk esok.</span></h1>
+          <p class="hero-description">Ruang tumbuh untuk talenta muda yang ingin mengubah rasa ingin tahu menjadi keahlian, karya, dan masa depan yang lebih siap.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#karya">Jelajahi karya
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg>
+            </a>
+            <a class="button button-secondary" href="#kontak">Hubungi sekolah</a>
+          </div>
+          <div class="hero-note">
+            <span class="note-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"></path><path d="M8 7h8m-8 4h8"></path></svg></span>
+            <span>Kenali program dan layanan kami<br><strong>Informasi sekolah dalam satu halaman</strong></span>
+          </div>
+        </div>
+        <div class="hero-visual reveal reveal-right reveal-delay" data-carousel="hero" role="region" aria-roledescription="carousel" aria-label="Galeri suasana belajar">
+          <div class="hero-image-wrap">
+            <img class="carousel-image" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1100&q=76" alt="Siswa berkolaborasi mengerjakan proyek bersama" width="1100" height="948" fetchpriority="high">
+            <div class="image-caption"><strong>Ruang untuk mencoba hal baru</strong><small>Belajar · Praktik · Berkarya</small></div>
+            <div class="carousel-controls">
+              <div class="carousel-controls-left">
+                <button class="carousel-button" type="button" data-carousel-prev aria-label="Foto sebelumnya">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m7 7-7-7 7-7"></path></svg>
+                </button>
+                <span class="carousel-count" aria-live="polite">01 / 03</span>
+                <button class="carousel-button" type="button" data-carousel-next aria-label="Foto berikutnya">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg>
+                </button>
+              </div>
+              <div class="carousel-dots" aria-label="Pilih foto">
+                <button class="carousel-dot" type="button" data-carousel-dot="0" aria-label="Tampilkan foto 1 dari 3" aria-pressed="true"></button>
+                <button class="carousel-dot" type="button" data-carousel-dot="1" aria-label="Tampilkan foto 2 dari 3" aria-pressed="false"></button>
+                <button class="carousel-dot" type="button" data-carousel-dot="2" aria-label="Tampilkan foto 3 dari 3" aria-pressed="false"></button>
+              </div>
+            </div>
+          </div>
+          <div class="floating-card">
+            <span class="floating-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"></path><path d="m9 10 2 2 4-4"></path></svg></span>
+            <span><strong>Belajar berbasis karya</strong><small>Ide kecil, dampak nyata</small></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="intro-strip" aria-label="Nilai utama sekolah">
+      <div class="container intro-grid">
+        <div class="intro-item reveal"><span class="intro-number">01</span><p><strong>Belajar dengan praktik</strong>Materi jadi pengalaman nyata</p></div>
+        <div class="intro-item reveal reveal-delay"><span class="intro-number">02</span><p><strong>Tumbuh bersama</strong>Kolaborasi dan saling dukung</p></div>
+        <div class="intro-item reveal reveal-delay-more"><span class="intro-number">03</span><p><strong>Siap melangkah</strong>Bekal untuk dunia kerja dan lanjut studi</p></div>
+      </div>
+    </div>
+
+    <section class="container section about-section" id="tentang">
+      <div class="about-visual reveal reveal-right" data-carousel="about" role="region" aria-roledescription="carousel" aria-label="Galeri kegiatan sekolah">
+        <div class="about-image-wrap">
+          <img class="carousel-image about-image" src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=850&q=75" alt="Suasana belajar di ruang kelas" width="850" height="865" loading="lazy" decoding="async">
+          <div class="carousel-controls">
+            <div class="carousel-controls-left">
+              <button class="carousel-button" type="button" data-carousel-prev aria-label="Foto sebelumnya">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m7 7-7-7 7-7"></path></svg>
+              </button>
+              <span class="carousel-count" aria-live="polite">01 / 03</span>
+              <button class="carousel-button" type="button" data-carousel-next aria-label="Foto berikutnya">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg>
+              </button>
+            </div>
+            <div class="carousel-dots" aria-label="Pilih foto">
+              <button class="carousel-dot" type="button" data-carousel-dot="0" aria-label="Tampilkan foto 1 dari 3" aria-pressed="true"></button>
+              <button class="carousel-dot" type="button" data-carousel-dot="1" aria-label="Tampilkan foto 2 dari 3" aria-pressed="false"></button>
+              <button class="carousel-dot" type="button" data-carousel-dot="2" aria-label="Tampilkan foto 3 dari 3" aria-pressed="false"></button>
+            </div>
+          </div>
+        </div>
+        <div class="about-sticker" aria-label="Belajar, berani, berdampak"><strong>Terus<br>bertumbuh</strong><small>mulai dari<br>rasa ingin tahu</small></div>
+      </div>
+      <div class="about-copy reveal reveal-delay">
+        <p class="eyebrow">Tentang sekolah</p>
+        <h2>Keahlian tumbuh saat <span>teori bertemu praktik.</span></h2>
+        <p>SMK Cipta Karya adalah identitas contoh untuk sekolah vokasi yang menempatkan rasa ingin tahu, pembelajaran terapan, dan keberanian mencoba sebagai bagian dari perjalanan siswa.</p>
+        <ul class="check-list">
+          <li><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"></path></svg></span>Belajar lewat proyek dan pemecahan masalah</li>
+          <li><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"></path></svg></span>Membangun portofolio dan pengalaman kolaborasi</li>
+          <li><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"></path></svg></span>Mendorong siswa siap berkarya dan terus berkembang</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="skills-section section" id="keahlian">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow">Belajar sesuai minat</p><h2>Program <span>keahlian.</span></h2></div>
+          <p>Pilih bidang yang membuatmu penasaran, lalu kembangkan jadi kemampuan yang bisa ditunjukkan lewat karya.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="skill-card reveal">
+            <span class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 21h8m-4-4v4m-3-12 2 2-2 2m4 0h3"></path></svg></span>
+            <h3>PPLG</h3><p>Logika, pemrograman, dan pengembangan aplikasi digital.</p>
+          </article>
+          <article class="skill-card reveal reveal-delay">
+            <span class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M2.5 12h19M12 3a15 15 0 0 1 0 18m0-18a15 15 0 0 0 0 18"></path></svg></span>
+            <h3>TJKT</h3><p>Jaringan komputer, konektivitas, dan teknologi komunikasi.</p>
+          </article>
+          <article class="skill-card reveal reveal-delay-more">
+            <span class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2L12 3Z"></path><path d="m19 14 1.2 3.1L23 18l-2.8 1.1L19 22l-1.1-2.9L15 18l2.9-.9L19 14Z"></path></svg></span>
+            <h3>DKV</h3><p>Komunikasi visual, ilustrasi, desain, dan produksi konten.</p>
+          </article>
+          <article class="skill-card reveal">
+            <span class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M7 9h4m-4 4h2m5-4h3m-3 4h3M8 19v3m8-3v3M6 22h12"></path></svg></span>
+            <h3>Akuntansi</h3><p>Administrasi keuangan, pencatatan, dan literasi bisnis.</p>
+          </article>
+        </div>
+        <p class="section-footnote">* Daftar program di atas hanya contoh. Sesuaikan dengan jurusan yang tersedia di sekolah.</p>
+      </div>
+    </section>
+
+    <section class="animated-slogan" aria-label="Ajakan memilih sekolah">
+      <div class="animated-slogan-inner">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> Temukan tempat untuk berkembang</p>
+        <div class="slogan-stage" aria-hidden="true">
+          <p class="slogan-message">Cari jurusan IT?</p>
+          <p class="slogan-message">Mau sekolah yang mendukung minat dan jurusanmu?</p>
+          <p class="slogan-message">SMK Cipta Karya solusinya!</p>
+        </div>
+        <span class="visually-hidden">Cari jurusan IT? Mau sekolah yang mendukung minat dan jurusanmu? SMK Cipta Karya solusinya!</span>
+      </div>
+    </section>
+
+    <section class="container section" id="karya">
+      <div class="section-heading reveal">
+        <div><p class="eyebrow">Dari ide jadi solusi</p><h2>Karya yang <span>bercerita.</span></h2></div>
+        <p>Ingin sekolah yang mendukung jurusan, minat, dan karyamu? Yuk, lihat contoh karya lintas bidang dari proses belajar yang dekat dengan dunia nyata.</p>
+      </div>
+      <div class="projects-grid">
+        <article class="project-card reveal">
+          <div class="project-image">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=780&q=74" alt="Laptop yang digunakan untuk proyek pengembangan web" width="780" height="650" loading="lazy" decoding="async">
+            <span class="project-tag">Teknologi</span>
+          </div>
+          <div class="project-info"><div><h3>Website informasi sekolah</h3><p>Contoh proyek · desain dan pengembangan web</p></div><span class="project-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg></span></div>
+        </article>
+        <article class="project-card reveal reveal-delay">
+          <div class="project-image">
+            <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=780&q=74" alt="Tim berkolaborasi merancang solusi dan layanan digital" width="780" height="650" loading="lazy" decoding="async">
+            <span class="project-tag">Kolaborasi</span>
+          </div>
+          <div class="project-info"><div><h3>Sistem inventaris sederhana</h3><p>Contoh proyek · pencatatan dan alur data</p></div><span class="project-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg></span></div>
+        </article>
+        <article class="project-card reveal reveal-delay-more">
+          <div class="project-image">
+            <img src="https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=780&q=74" alt="Perangkat digital untuk proses kreatif dan desain visual" width="780" height="650" loading="lazy" decoding="async">
+            <span class="project-tag">Kreativitas</span>
+          </div>
+          <div class="project-info"><div><h3>Identitas visual UMKM</h3><p>Contoh proyek · desain dan komunikasi visual</p></div><span class="project-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg></span></div>
+        </article>
+      </div>
+      <p class="section-footnote">* Nama dan gambar proyek merupakan contoh visual; ganti dengan dokumentasi karya sekolah yang sebenarnya.</p>
+    </section>
+
+    <section class="service-band">
+      <div class="container service-content reveal">
+        <div>
+          <p class="eyebrow">Belajar tak harus sendiri</p>
+          <h2>Kolaborasi membuka <span>lebih banyak jalan.</span></h2>
+          <p>Terbuka untuk kunjungan, kemitraan, praktik kerja, dan berbagi inspirasi dengan komunitas.</p>
+        </div>
+        <div class="service-actions"><a class="button button-light" href="mailto:email@sekolah.sch.id?subject=Kolaborasi%20dengan%20sekolah">Diskusikan kolaborasi
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg>
+        </a></div>
+      </div>
+    </section>
+
+    <section class="container contact-section" id="kontak">
+      <div class="contact-copy reveal">
+        <p class="eyebrow">Mari terhubung</p>
+        <h2>Punya pertanyaan atau ide <span>kolaborasi?</span></h2>
+        <p>Tim sekolah siap membantu menjawab pertanyaan tentang program keahlian, layanan, kunjungan, maupun peluang kerja sama.</p>
+        <a class="button button-primary" href="data:text/plain;charset=utf-8,Profil%20SMK%20Cipta%20Karya%0ANama%20sekolah%3A%20SMK%20Cipta%20Karya%20(contoh)%0AEmail%3A%20email%40sekolah.sch.id%20(ganti%20dengan%20email%20resmi)%0AProgram%20keahlian%3A%20sesuaikan%20dengan%20sekolah%0A" download="profil-sekolah.txt" id="download-profile">
+          Unduh profil sekolah <span aria-hidden="true">↓</span>
+        </a>
+      </div>
+      <div class="contact-card reveal reveal-delay">
+        <span class="contact-card-label">Email resmi sekolah</span>
+        <a class="contact-email" href="mailto:email@sekolah.sch.id">email@sekolah.sch.id
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"></path><path d="m4 7 8 6 8-6"></path></svg>
+        </a>
+        <a class="button button-secondary" href="mailto:email@sekolah.sch.id?subject=Informasi%20SMK%20Cipta%20Karya">Kirim email
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4 20-7ZM22 2 11 13"></path></svg>
+        </a>
+        <p class="placeholder-note">Nama sekolah, alamat email, isi profil, dan foto di halaman ini masih contoh. Ganti dengan informasi resmi sebelum dipublikasikan.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner reveal">
+      <a class="brand" href="#beranda"><span class="brand-mark" aria-hidden="true">CK</span><span class="brand-copy">SMK Cipta Karya<small>Sekolah vokasi</small></span></a>
+      <p>© <span id="current-year">2026</span> SMK Cipta Karya. Dibuat untuk terus bertumbuh.</p>
+      <nav class="footer-links" aria-label="Navigasi footer"><a href="#tentang">Tentang</a><a href="#karya">Karya</a><a href="#kontak">Kontak</a></nav>
+    </div>
+  </footer>
+
+  <script>
+    const root = document.documentElement;
+    const themeButton = document.querySelector(".theme-toggle");
+    const menuButton = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+    const themeIcon = document.querySelector(".theme-icon");
+    const darkIcon = '<path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5a8.6 8.6 0 1 0 12 12Z"></path>';
+    const lightIcon = '<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>';
+
+    function setTheme(theme, persist) {
+      root.dataset.theme = theme;
+      const isDark = theme === "dark";
+      themeButton.setAttribute("aria-label", isDark ? "Aktifkan tema terang" : "Aktifkan tema gelap");
+      themeIcon.innerHTML = isDark ? darkIcon : lightIcon;
+      document.querySelector('meta[name="theme-color"]').content = isDark ? "#101010" : "#f7f7f7";
+      if (persist) {
+        try {
+          localStorage.setItem("smk-portfolio-theme", theme);
+        } catch (error) {
+          console.warn("Preferensi tema tidak dapat disimpan.", error);
+        }
+      }
+    }
+
+    let initialTheme = "light";
+    try {
+      const savedTheme = localStorage.getItem("smk-portfolio-theme");
+      if (savedTheme === "light" || savedTheme === "dark") initialTheme = savedTheme;
+      else if (window.matchMedia("(prefers-color-scheme: dark)").matches) initialTheme = "dark";
+    } catch (error) {
+      console.warn("Preferensi tema sebelumnya tidak dapat dibaca.", error);
+    }
+    setTheme(initialTheme, false);
+    themeButton.addEventListener("click", () => setTheme(root.dataset.theme === "dark" ? "light" : "dark", true));
+
+    function closeMenu() {
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.setAttribute("aria-label", "Buka menu navigasi");
+      navLinks.classList.remove("is-open");
+    }
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = menuButton.getAttribute("aria-expanded") !== "true";
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.setAttribute("aria-label", isOpen ? "Tutup menu navigasi" : "Buka menu navigasi");
+      navLinks.classList.toggle("is-open", isOpen);
+    });
+    navLinks.addEventListener("click", (event) => {
+      if (event.target.closest("a")) closeMenu();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeMenu();
+    });
+
+    const profileText = [
+      "PROFIL SEKOLAH — SMK CIPTA KARYA (NAMA CONTOH)",
+      "",
+      "Tentang",
+      "Sekolah vokasi yang mendorong pembelajaran terapan, kolaborasi, dan karya.",
+      "",
+      "Program keahlian (contoh)",
+      "- PPLG",
+      "- TJKT",
+      "- DKV",
+      "- Akuntansi",
+      "",
+      "Kontak",
+      "Email: email@sekolah.sch.id (ganti dengan email resmi)",
+      "",
+      "Catatan: ganti nama, program, deskripsi, dan email dengan informasi resmi sekolah."
+    ].join("\n");
+    document.querySelector("#download-profile").href = `data:text/plain;charset=utf-8,${encodeURIComponent(profileText)}`;
+    document.querySelector("#current-year").textContent = new Date().getFullYear();
+
+    const carouselSlides = {
+      hero: [
+        {
+          src: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1100&q=76",
+          alt: "Siswa berkolaborasi mengerjakan proyek bersama",
+          title: "Ruang untuk mencoba hal baru",
+          caption: "Belajar · Praktik · Berkarya"
+        },
+        {
+          src: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1100&q=76",
+          alt: "Guru mendampingi siswa dalam kegiatan belajar di kelas",
+          title: "Belajar dengan pendampingan",
+          caption: "Bertanya · Mencoba · Bertumbuh"
+        },
+        {
+          src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1100&q=76",
+          alt: "Siswa mengikuti kegiatan belajar dengan penuh semangat",
+          title: "Semangat tumbuh bersama",
+          caption: "Minat · Keahlian · Masa depan"
+        }
+      ],
+      about: [
+        {
+          src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=850&q=75",
+          alt: "Suasana belajar di ruang kelas"
+        },
+        {
+          src: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=850&q=75",
+          alt: "Siswa berkumpul dan berkolaborasi dalam kegiatan sekolah"
+        },
+        {
+          src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=850&q=75",
+          alt: "Siswa belajar dan mengembangkan kemampuan di sekolah"
+        }
+      ]
+    };
+
+    document.querySelectorAll("[data-carousel]").forEach((carousel) => {
+      const slides = carouselSlides[carousel.dataset.carousel];
+      const image = carousel.querySelector(".carousel-image");
+      const counter = carousel.querySelector(".carousel-count");
+      const dots = [...carousel.querySelectorAll("[data-carousel-dot]")];
+      const imageFrame = carousel.querySelector(".hero-image-wrap, .about-image-wrap");
+      const track = document.createElement("div");
+      track.className = "carousel-track";
+      track.setAttribute("aria-live", "off");
+      track.style.width = `${(slides.length + 2) * 100}%`;
+      imageFrame.insertBefore(track, image);
+
+      function createTrackImage(slide) {
+        const trackImage = document.createElement("img");
+        trackImage.className = "carousel-image";
+        trackImage.src = slide.src;
+        trackImage.alt = slide.alt;
+        trackImage.width = image.width;
+        trackImage.height = image.height;
+        trackImage.loading = "eager";
+        trackImage.decoding = "async";
+        trackImage.setAttribute("aria-hidden", "true");
+        trackImage.style.width = `${100 / (slides.length + 2)}%`;
+        return trackImage;
+      }
+
+      track.append(createTrackImage(slides[slides.length - 1]));
+      track.append(image);
+      image.style.width = `${100 / (slides.length + 2)}%`;
+      image.setAttribute("aria-hidden", "false");
+
+      slides.slice(1).forEach((slide) => {
+        track.append(createTrackImage(slide));
+      });
+      track.append(createTrackImage(slides[0]));
+
+      const trackImages = [...track.querySelectorAll(".carousel-image")];
+      const actualImages = trackImages.slice(1, slides.length + 1);
+      let activeIndex = 0;
+      let trackIndex = 1;
+      let snapAfterTransition = null;
+      let swipeStartX = null;
+      let autoplayTimer;
+      track.style.transform = `translate3d(-${trackIndex * (100 / trackImages.length)}%, 0, 0)`;
+
+      function showSlide(index) {
+        if (index < 0) {
+          activeIndex = slides.length - 1;
+          trackIndex = 0;
+          snapAfterTransition = slides.length;
+        } else if (index >= slides.length) {
+          activeIndex = 0;
+          trackIndex = slides.length + 1;
+          snapAfterTransition = 1;
+        } else {
+          activeIndex = index;
+          trackIndex = activeIndex + 1;
+          snapAfterTransition = null;
+        }
+        const slide = slides[activeIndex];
+        track.style.transform = `translate3d(-${trackIndex * (100 / trackImages.length)}%, 0, 0)`;
+        trackImages.forEach((trackImage) => trackImage.setAttribute("aria-hidden", "true"));
+        actualImages.forEach((trackImage, imageIndex) => {
+          trackImage.setAttribute("aria-hidden", String(imageIndex !== activeIndex));
+        });
+        const caption = carousel.querySelector(".image-caption");
+        if (caption && slide.title && slide.caption) {
+          caption.querySelector("strong").textContent = slide.title;
+          caption.querySelector("small").textContent = slide.caption;
+        }
+        counter.textContent = `0${activeIndex + 1} / 0${slides.length}`;
+        dots.forEach((dot, dotIndex) => {
+          dot.setAttribute("aria-pressed", String(dotIndex === activeIndex));
+        });
+      }
+
+      track.addEventListener("transitionend", (event) => {
+        if (event.propertyName !== "transform" || snapAfterTransition === null) return;
+        trackIndex = snapAfterTransition;
+        snapAfterTransition = null;
+        track.style.transition = "none";
+        track.style.transform = `translate3d(-${trackIndex * (100 / trackImages.length)}%, 0, 0)`;
+        track.offsetWidth;
+        track.style.transition = "";
+      });
+
+      function scheduleAutoplay() {
+        window.clearTimeout(autoplayTimer);
+        autoplayTimer = window.setTimeout(() => {
+          if (document.hidden || carousel.matches(":hover") || carousel.contains(document.activeElement)) {
+            scheduleAutoplay();
+            return;
+          }
+          showSlide(activeIndex + 1);
+          scheduleAutoplay();
+        }, 7500);
+      }
+
+      carousel.querySelector("[data-carousel-prev]").addEventListener("click", () => {
+        showSlide(activeIndex - 1);
+        scheduleAutoplay();
+      });
+      carousel.querySelector("[data-carousel-next]").addEventListener("click", () => {
+        showSlide(activeIndex + 1);
+        scheduleAutoplay();
+      });
+      dots.forEach((dot) => {
+        dot.addEventListener("click", () => {
+          showSlide(Number(dot.dataset.carouselDot));
+          scheduleAutoplay();
+        });
+      });
+
+      imageFrame.addEventListener("pointerdown", (event) => {
+        swipeStartX = event.clientX;
+      });
+      imageFrame.addEventListener("pointerup", (event) => {
+        if (swipeStartX === null) return;
+        const distance = event.clientX - swipeStartX;
+        if (Math.abs(distance) > 45) {
+          showSlide(activeIndex + (distance < 0 ? 1 : -1));
+          scheduleAutoplay();
+        }
+        swipeStartX = null;
+      });
+      imageFrame.addEventListener("pointercancel", () => { swipeStartX = null; });
+      scheduleAutoplay();
+    });
+
+    const revealElements = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      root.classList.add("js-motion");
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const bounds = entry.target.getBoundingClientRect();
+          const inViewport = bounds.bottom > 0 && bounds.top < window.innerHeight
+            && bounds.right > 0 && bounds.left < window.innerWidth;
+          if (entry.isIntersecting && inViewport) {
+            entry.target.classList.add("is-visible");
+          } else {
+            entry.target.classList.remove("is-visible");
+          }
+        });
+      }, { threshold: 0.12 });
+      requestAnimationFrame(() => {
+        revealElements.forEach((element) => {
+          element.classList.remove("is-visible");
+          void element.offsetWidth;
+          revealObserver.observe(element);
+        });
+      });
+    } else {
+      revealElements.forEach((element) => element.classList.add("is-visible"));
+    }
+  </script>
+</body>
+</html>
